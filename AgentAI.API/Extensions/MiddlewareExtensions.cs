@@ -13,9 +13,11 @@ public static class MiddlewareExtensions
         app.UseHttpsRedirection();
         
         app.UseRateLimiter();
-        
+
         app.UseCors("AllowAll");
-        
+
+        app.UseAuthentication();
+
         app.UseAuthorization();
 
         return app;

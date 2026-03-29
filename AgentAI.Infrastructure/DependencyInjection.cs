@@ -38,6 +38,7 @@ public static class DependencyInjection
         services.AddScoped<IToolExecutionService, ToolExecutionService>();
         services.AddScoped<IIndexingService, IndexingService>();
         services.AddScoped<IAgentOrchestrationService, AgentOrchestrationService>();
+        services.AddScoped<IAuthService, AuthService>();
 
         var kernelBuilder = services.AddKernel();
         
