@@ -1,0 +1,456 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vsidx
+*.vspscc
+*.vssscc
+.vs/
+.vscode/
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+.vscode/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+# Rider
+.idea/
+*.sln.iml
+_ReSharper.Caches/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build Results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+.nuget/
+
+# Entity Framework Migrations
+**/Migrations/*.Designer.cs
+**/Migrations/*.resx
+
+# ===================================
+# SECURITY: Sensitive Information
+# ===================================
+
+# Configuration files with secrets
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.*.json
+!appsettings.Example.json
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+*.env
+
+# API Keys and Secrets
+**/secrets.json
+**/secrets.*.json
+secrets/
+*.key
+*.pem
+*.pfx
+*.p12
+*.cer
+*.crt
+
+# Database credentials
+connectionstrings.json
+database.json
+*.db
+*.sqlite
+*.sqlite3
+
+# OpenRouter / OpenAI API Keys
+openrouter.key
+openai.key
+anthropic.key
+*.apikey
+
+# Azure / Cloud credentials
+*.publishsettings
+*.azurePubxml
+ServiceConfiguration.*.cscfg
+*.cer
+*.pfx
+
+# AWS credentials
+.aws/
+aws-credentials.json
+
+# Docker secrets
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes secrets
+*-secrets.yaml
+*-secret.yaml
+secrets.yaml
+
+# Certificate files
+*.pfx
+*.p12
+*.pem
+*.key
+*.crt
+*.cer
+
+# SSH Keys
+id_rsa
+id_rsa.pub
+*.ppk
+
+# ===================================
+# Operating System Files
+# ===================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===================================
+# IDE and Editor Files
+# ===================================
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+_ReSharper.Caches/
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===================================
+# Logs and Temporary Files
+# ===================================
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
+tmp/
+temp/
+
+# ===================================
+# Database Files
+# ===================================
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# SQL Server
+*.mdf
+*.ldf
+
+# PostgreSQL
+*.dump
+*.sql.gz
+
+# ===================================
+# AI and ML Files
+# ===================================
+
+# Model files
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.pb
+models/
+checkpoints/
+
+# Vector databases
+*.faiss
+*.index
+vectordb/
+embeddings/
+
+# ===================================
+# Documentation (Keep generated)
+# ===================================
+
+# Keep these documentation files
+!README.md
+!CONTRIBUTING.md
+!LICENSE
+!CHANGELOG.md
+!.github/
+
+# Remove old documentation
+ENTERPRISE_FRAMEWORK_INTEGRATION.md
+COMPLETE_ENTERPRISE_PATTERNS.md
+
+# ===================================
+# Node.js (if using frontend)
+# ===================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# ===================================
+# Python (if using ML scripts)
+# ===================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv
+
+# ===================================
+# Docker
+# ===================================
+
+docker-compose.override.yml
+.dockerignore
+
+# ===================================
+# Backup Files
+# ===================================
+
+*.bak
+*.backup
+*.old
+*_backup
+*_old
+
+# ===================================
+# Project Specific
+# ===================================
+
+# Indexed repositories (large files)
+IndexedRepositories/
+CodeIndexes/
+VectorStores/
+
+# User uploads
+uploads/
+temp-files/
+user-data/
+
+# Generated files
+generated/
+auto-generated/
+
+# Test data
+test-data/
+sample-data/
+
+# Performance profiling
+*.diagsession
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Code coverage
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# Benchmark results
+BenchmarkDotNet.Artifacts/
+
+# ===================================
+# Keep These Files
+# ===================================
+
+# Keep example configuration
+!appsettings.Example.json
+
+# Keep .github folder
+!.github/
+!.github/**
+
+# Keep documentation
+!README.md
+!LICENSE
+!CONTRIBUTING.md

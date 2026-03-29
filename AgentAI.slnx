@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AgentAI.API/AgentAI.API.csproj" />
+  <Project Path="AgentAI.Application/AgentAI.Application.csproj" />
+  <Project Path="AgentAI.Domain/AgentAI.Domain.csproj" />
+  <Project Path="AgentAI.Infrastructure/AgentAI.Infrastructure.csproj" />
+</Solution>
