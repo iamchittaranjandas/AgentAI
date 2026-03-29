@@ -675,6 +675,18 @@ namespace AgentAI.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "admin@agentai.local",
+                            FullName = "System Administrator",
+                            IsActive = true,
+                            PasswordHash = "not-used",
+                            Role = 3
+                        });
                 });
 
             modelBuilder.Entity("AgentAI.Domain.Entities.CodeFile", b =>

@@ -48,22 +48,27 @@ public static class DependencyInjection
 
         if (!string.IsNullOrEmpty(openRouterKey))
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(openRouterEndpoint)
-            };
-            httpClient.DefaultRequestHeaders.Add("HTTP-Referer", configuration["OpenRouter:SiteUrl"] ?? "http://localhost:5000");
-            httpClient.DefaultRequestHeaders.Add("X-Title", configuration["OpenRouter:SiteName"] ?? "AgentAI");
+            var chatHttpClient = new HttpClient();
+            chatHttpClient.DefaultRequestHeaders.Add("HTTP-Referer", configuration["OpenRouter:SiteUrl"] ?? "http://localhost:5000");
+            chatHttpClient.DefaultRequestHeaders.Add("X-Title", configuration["OpenRouter:SiteName"] ?? "AgentAI");
 
             kernelBuilder.AddOpenAIChatCompletion(
                 modelId: openRouterModel,
                 apiKey: openRouterKey,
-                httpClient: httpClient);
-            
+                endpoint: new Uri(openRouterEndpoint),
+                httpClient: chatHttpClient);
+
+            var embeddingHttpClient = new HttpClient
+            {
+                BaseAddress = new Uri(openRouterEndpoint)
+            };
+            embeddingHttpClient.DefaultRequestHeaders.Add("HTTP-Referer", configuration["OpenRouter:SiteUrl"] ?? "http://localhost:5000");
+            embeddingHttpClient.DefaultRequestHeaders.Add("X-Title", configuration["OpenRouter:SiteName"] ?? "AgentAI");
+
             kernelBuilder.AddOpenAITextEmbeddingGeneration(
                 modelId: embeddingModel,
                 apiKey: openRouterKey,
-                httpClient: httpClient);
+                httpClient: embeddingHttpClient);
         }
 
         services.AddScoped<ILLMProvider, SemanticKernelLLMProvider>();

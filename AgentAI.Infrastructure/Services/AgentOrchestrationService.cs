@@ -5,6 +5,7 @@ using AgentAI.Application.Interfaces.Repositories;
 using AgentAI.Application.Interfaces.Services;
 using AgentAI.Domain.Entities;
 using AgentAI.Domain.Enums;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace AgentAI.Infrastructure.Services;
@@ -15,17 +16,20 @@ public class AgentOrchestrationService : IAgentOrchestrationService
     private readonly IPromptRecordRepository _promptRecordRepository;
     private readonly IRetrievalService _retrievalService;
     private readonly ILLMProvider _llmProvider;
+    private readonly ILogger<AgentOrchestrationService> _logger;
 
     public AgentOrchestrationService(
         ISessionRepository sessionRepository,
         IPromptRecordRepository promptRecordRepository,
         IRetrievalService retrievalService,
-        ILLMProvider llmProvider)
+        ILLMProvider llmProvider,
+        ILogger<AgentOrchestrationService> logger)
     {
         _sessionRepository = sessionRepository;
         _promptRecordRepository = promptRecordRepository;
         _retrievalService = retrievalService;
         _llmProvider = llmProvider;
+        _logger = logger;
     }
 
     public async Task<Result<ChatResponse>> ProcessChatRequestAsync(ChatRequest request, CancellationToken cancellationToken = default)
@@ -106,11 +110,20 @@ public class AgentOrchestrationService : IAgentOrchestrationService
         catch (Exception ex)
         {
             stopwatch.Stop();
-            promptRecord.ErrorMessage = ex.Message;
+
+            _logger.LogError(ex,
+                "Chat request failed for session {SessionId} | Intent: {Intent} | Elapsed: {ElapsedMs}ms | Error: {Message} | Inner: {InnerMessage}",
+                request.SessionId,
+                promptRecord.DetectedIntent,
+                stopwatch.ElapsedMilliseconds,
+                ex.Message,
+                ex.InnerException?.Message ?? "none");
+
+            promptRecord.ErrorMessage = GetErrorChain(ex);
             promptRecord.ResponseTime = stopwatch.Elapsed;
             await _promptRecordRepository.AddAsync(promptRecord, cancellationToken);
 
-            return Result<ChatResponse>.FailureResult($"Error processing chat request: {ex.Message}");
+            return Result<ChatResponse>.FailureResult(GetAllErrors(ex));
         }
     }
 
@@ -144,5 +157,29 @@ public class AgentOrchestrationService : IAgentOrchestrationService
     private static int EstimateTokens(string prompt, string response)
     {
         return (prompt.Length + response.Length) / 4;
+    }
+
+    private static string GetErrorChain(Exception ex)
+    {
+        var parts = new List<string>();
+        var current = ex;
+        while (current != null)
+        {
+            parts.Add(current.Message);
+            current = current.InnerException;
+        }
+        return string.Join(" → ", parts);
+    }
+
+    private static List<string> GetAllErrors(Exception ex)
+    {
+        var errors = new List<string>();
+        var current = ex;
+        while (current != null)
+        {
+            errors.Add(current.Message);
+            current = current.InnerException;
+        }
+        return errors;
     }
 }

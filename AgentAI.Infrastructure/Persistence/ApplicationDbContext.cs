@@ -36,6 +36,18 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        // Seed the default system user used by the application
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+            Email = "admin@agentai.local",
+            FullName = "System Administrator",
+            PasswordHash = "not-used",
+            Role = Domain.Enums.UserRole.Admin,
+            IsActive = true,
+            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+        });
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

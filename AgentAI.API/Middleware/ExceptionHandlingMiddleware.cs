@@ -23,7 +23,14 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An unhandled exception occurred");
+            _logger.LogError(ex,
+                "Unhandled exception on {Method} {Path} | TraceId: {TraceId} | Message: {Message} | InnerException: {InnerMessage}",
+                context.Request.Method,
+                context.Request.Path,
+                context.TraceIdentifier,
+                ex.Message,
+                ex.InnerException?.Message ?? "none");
+
             await HandleExceptionAsync(context, ex);
         }
     }
@@ -33,18 +40,28 @@ public class ExceptionHandlingMiddleware
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+        var errors = BuildErrorChain(exception);
+
         var response = new ApiResponse<object>
         {
             Success = false,
             Message = "An error occurred while processing your request",
-            Errors = new List<string> { exception.Message }
+            Errors = errors
         };
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
+        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
         await context.Response.WriteAsync(JsonSerializer.Serialize(response, options));
+    }
+
+    private static List<string> BuildErrorChain(Exception ex)
+    {
+        var errors = new List<string>();
+        var current = ex;
+        while (current != null)
+        {
+            errors.Add(current.Message);
+            current = current.InnerException;
+        }
+        return errors;
     }
 }
